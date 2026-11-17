@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { CATEGORIES, getCategory, slug } from "@/lib/catalog";
 import CategoryView from "@/components/CategoryView";
@@ -11,7 +12,16 @@ export async function generateMetadata({ params }) {
   return { title: cat ? cat.name : "Not found" };
 }
 
-export default async function CategoryPage({ params }) {
+// The page reads its address inside <Suspense> so links can show the page shell instantly.
+export default function CategoryPage({ params }) {
+  return (
+    <Suspense fallback={<section className="page" />}>
+      <Category params={params} />
+    </Suspense>
+  );
+}
+
+async function Category({ params }) {
   const { category } = await params;
   const cat = getCategory(category);
   if (!cat) notFound();

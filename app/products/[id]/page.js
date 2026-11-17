@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PRODUCTS, getProduct } from "@/lib/catalog";
@@ -13,7 +14,15 @@ export async function generateMetadata({ params }) {
   return p ? { title: p.name, description: `${p.name}, $${p.price}. ${p.category} by ZNS.` } : { title: "Not found" };
 }
 
-export default async function ProductPage({ params }) {
+export default function ProductPage({ params }) {
+  return (
+    <Suspense fallback={<section className="page" />}>
+      <Product params={params} />
+    </Suspense>
+  );
+}
+
+async function Product({ params }) {
   const p = getProduct((await params).id);
   if (!p) notFound();
   const base = p.members ? "/exclusive" : `/shop/${p.categorySlug}`;

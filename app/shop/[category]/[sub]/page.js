@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { CATEGORIES, getCategory, slug } from "@/lib/catalog";
 import CategoryView from "@/components/CategoryView";
@@ -17,7 +18,15 @@ export async function generateMetadata({ params }) {
   return { title: name ? `${name} · ${cat.name}` : "Not found" };
 }
 
-export default async function SubPage({ params }) {
+export default function SubPage({ params }) {
+  return (
+    <Suspense fallback={<section className="page" />}>
+      <Sub params={params} />
+    </Suspense>
+  );
+}
+
+async function Sub({ params }) {
   const { category, sub } = await params;
   const { cat, name } = find(category, sub);
   if (!name) notFound();
