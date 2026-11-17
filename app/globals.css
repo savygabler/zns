@@ -94,3 +94,10 @@ footer{background:rgba(0,0,0,.5);backdrop-filter:blur(6px);margin-top:auto}
 .narrow{max-width:520px}
 .mbox.inline{max-width:none;width:100%;max-height:none}
 @media (max-width:760px){.pdp{grid-template-columns:1fr;gap:20px}}
+
+/* Cart shipping and policy table */
+.shipto{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0 6px;font-size:14px}
+.shipto select{background:#0a0a0a;color:var(--fg);border:1px solid #444;padding:7px 10px;font:inherit;font-size:13px}
+#drawer .row{display:flex;justify-content:space-between;padding:4px 0;font-size:14px;color:#c9c9c9}
+.ship{width:100%;border-collapse:collapse;font-size:13px;margin:0 0 12px}.ship th,.ship td{text-align:left;padding:6px 6px 6px 0;border-bottom:1px solid #2a2a2a}.ship th{color:var(--mut);font-weight:600}
+.hint2{margin:4px 0 0;font-size:12px;color:var(--em2)}

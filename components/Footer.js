@@ -9,6 +9,7 @@ export default function Footer() {
       <div className="f-l"></div>
       <div className="f-c">
         <button className="subl" onClick={() => setModal("join")}>Join the Exclusive List</button>
+        <button onClick={() => setModal("shipping")}>Shipping &amp; Returns</button>
         <button onClick={() => setModal("terms")}>Terms &amp; Conditions</button>
       </div>
       <div className="f-r">

@@ -1,7 +1,7 @@
 "use client";
 
 import { useSite } from "./SiteProvider";
-import { TermsText, SupportText } from "./InfoText";
+import { TermsText, SupportText, ShippingText } from "./InfoText";
 import JoinForm from "./JoinForm";
 
 export default function Modal() {
@@ -13,6 +13,7 @@ export default function Modal() {
         <button className="cl" onClick={close} aria-label="Close">×</button>
         {modal === "terms" && <TermsText />}
         {modal === "support" && <SupportText />}
+        {modal === "shipping" && <ShippingText />}
         {modal === "join" && <JoinForm onDone={close} />}
       </div>
     </div>

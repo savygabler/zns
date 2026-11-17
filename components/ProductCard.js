@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { money } from "@/lib/site";
 import ProductImage from "./ProductImage";
 import { useSite } from "./SiteProvider";
 
@@ -12,7 +13,7 @@ export default function ProductCard({ product, index }) {
       <Link href={`/products/${product.id}`} className="cardlink">
         <ProductImage product={product} />
         <h3>{product.name}</h3>
-        <p>${product.price}</p>
+        <p>{money(product.price)}</p>
       </Link>
       {one ? (
         <button className="add" onClick={() => { add(product.id, product.sizes[0]); toast(`Added ${product.name}`); }}>

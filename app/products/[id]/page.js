@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PRODUCTS, getProduct } from "@/lib/catalog";
+import { RETURN_DAYS, money } from "@/lib/site";
 import ProductImage from "@/components/ProductImage";
 import ProductActions from "@/components/ProductActions";
 
@@ -11,7 +12,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }) {
   const p = getProduct((await params).id);
-  return p ? { title: p.name, description: `${p.name}, $${p.price}. ${p.category} by ZNS.` } : { title: "Not found" };
+  return p ? { title: p.name, description: `${p.name}, ${money(p.price)}. ${p.category} by ZNS.` } : { title: "Not found" };
 }
 
 export default function ProductPage({ params }) {
@@ -36,9 +37,9 @@ async function Product({ params }) {
         <ProductImage product={p} />
         <div>
           <h1>{p.name}</h1>
-          <p className="price">${p.price}</p>
+          <p className="price">{money(p.price)}</p>
           <p className="sub-t">
-            {p.sub} in {p.color}. {p.members ? "Members-only exclusive, final sale." : "Free returns within 30 days."}
+            {p.sub} in {p.color}. {p.members ? "Members-only exclusive, final sale." : `${RETURN_DAYS}-day returns on unworn items.`}
           </p>
           <ProductActions product={p} />
         </div>
